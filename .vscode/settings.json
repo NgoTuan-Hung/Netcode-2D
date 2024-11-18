@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Project Multiplayer.sln"
+    "dotnet.defaultSolution": "Netcode-2D.sln"
 }

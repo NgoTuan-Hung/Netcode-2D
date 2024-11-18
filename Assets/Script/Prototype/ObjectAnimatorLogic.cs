@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using ExcelDataReader;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -19,9 +20,12 @@ namespace Game
         }
 
         [Rpc(SendTo.Server)]
-        public void ChangeBoolServerRpc(string boolName, bool value)
+        public void ChangeBoolServerRpc(NativeArray<FixedString32Bytes> boolNames, bool[] values)
         {
-            objectInfoPacked.Animator.SetBool(boolName, value);
+            for (int i=0; i<boolNames.Length; i++)
+            {
+                objectInfoPacked.Animator.SetBool(boolNames[i].ToString(), values[i]);
+            }
         }
 
         // public void ChangeSateServerRpc(string state)

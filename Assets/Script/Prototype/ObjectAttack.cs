@@ -42,8 +42,21 @@ public class ObjectAttack : NetworkBehaviour
         {
             canAttack = false;
             StartCoroutine(ResetAttack());
+            StartCoroutine(CheckAttacking());
             objectInfoPacked.Animator.SetBool("Attack", true);
         }
+    }
+
+    private float defaultMoveSpeed;
+    public IEnumerator CheckAttacking()
+    {
+        defaultMoveSpeed = objectInfoPacked.ObjectMovable.MoveSpeed;
+        objectInfoPacked.MoveSpeed.Value *= 0.1f;
+        while (objectInfoPacked.Animator.GetBool("Attack"))
+        {
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+        }
+        objectInfoPacked.MoveSpeed.Value = defaultMoveSpeed;
     }
 
     private IEnumerator ResetAttack()

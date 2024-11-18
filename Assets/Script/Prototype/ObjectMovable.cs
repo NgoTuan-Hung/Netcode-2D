@@ -1,4 +1,5 @@
 
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -18,6 +19,23 @@ namespace Game
             objectInfoPacked = GetComponent<ObjectInfoPacked>();    
         }
 
+        private NativeArray<FixedString32Bytes> startWalk = new NativeArray<FixedString32Bytes>
+        (
+            new FixedString32Bytes[] {new FixedString32Bytes("StartWalk")}, Allocator.Persistent
+        );
+
+        private bool[] startWalkBool = new bool[] {true};
+
+        private NativeArray<FixedString32Bytes> startWalk_Walk = new NativeArray<FixedString32Bytes>
+        (
+            new FixedString32Bytes[] 
+            {
+                new FixedString32Bytes("StartWalk"),
+                new FixedString32Bytes("Walk")
+            }, Allocator.Persistent
+        );
+
+        private bool[] startWalk_WalkBool = new bool[] {false, false};
         private void Start() 
         {
             
@@ -39,13 +57,12 @@ namespace Game
                 MoveUsingKeySendToServerRpc(direction, facingDirection);
                 if (!objectInfoPacked.Animator.GetBool("StartWalk") && !objectInfoPacked.Animator.GetBool("Walk"))
                 {
-                    objectInfoPacked.ObjectAnimatorLogic.ChangeBoolServerRpc("StartWalk", true);
+                    objectInfoPacked.ObjectAnimatorLogic.ChangeBoolServerRpc(startWalk, startWalkBool);
                 }
             }
             else if (objectInfoPacked.Animator.GetBool("StartWalk") || objectInfoPacked.Animator.GetBool("Walk"))
             {
-                objectInfoPacked.ObjectAnimatorLogic.ChangeBoolServerRpc("StartWalk", false);
-                objectInfoPacked.ObjectAnimatorLogic.ChangeBoolServerRpc("Walk", false);
+                objectInfoPacked.ObjectAnimatorLogic.ChangeBoolServerRpc(startWalk_Walk, startWalk_WalkBool);
             }
         }
 
