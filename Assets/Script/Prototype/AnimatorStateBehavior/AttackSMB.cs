@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class AttackSMB : StateMachineBehaviour
 {
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        animator.SetBool("Attack", false);
-    }
+	
+	private void OnEnable() 
+	{
+		Debug.Log("AttackSMB OnEnable");
+	}
+	public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	{
+		animator.SetBool("Attack", false);
+	}
 }

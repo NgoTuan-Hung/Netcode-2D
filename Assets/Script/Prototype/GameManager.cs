@@ -114,8 +114,8 @@ public class GameManager : NetworkBehaviour
                                 else
                                 {
                                     objectInfoPacked = networkClient.PlayerObject.GetComponent<ObjectInfoPacked>();
-                                    objectInfoPacked.MoveSpeed.Value += speed;
-                                    commandOutput = "Current speed: " + objectInfoPacked.MoveSpeed.Value;
+                                    objectInfoPacked.ObjectMovable.MoveSpeedNetVar.Value += speed;
+                                    commandOutput = "Current speed: " + objectInfoPacked.ObjectMovable.MoveSpeedNetVar.Value;
                                     consoleLabel.text += "\n" + commandOutput;
                                 }
                             }
