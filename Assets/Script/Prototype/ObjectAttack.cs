@@ -26,11 +26,6 @@ public class ObjectAttack : NetworkBehaviour
 		}
 	}
 
-	private void OnCollisionEnter(Collision other) 
-	{
-		
-	}
-
 	private float attackCooldown = 3f;
 	private bool canAttack = true;
 	public float AttackCooldown { get => attackCooldown; set => attackCooldown = value; }

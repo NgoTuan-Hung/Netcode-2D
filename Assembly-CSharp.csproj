@@ -66,6 +66,7 @@
     <Analyzer Include="D:\Program\Unity\Editor\6000.0.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Prototype\Util\BinarySearchTree.cs" />
     <Compile Include="Assets\Script\Prototype\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\Script\NetworkTransformTest.cs" />
     <Compile Include="Assets\Script\Prototype\ObjectInfoPacked.cs" />
@@ -83,6 +84,8 @@
     <Compile Include="Assets\Script\Prototype\ObjectAnimatorLogic.cs" />
     <Compile Include="Assets\Script\Prototype\TestNetworkObjectSpawned.cs" />
     <Compile Include="Assets\Script\Test\FaceCameraPlane.cs" />
+    <Compile Include="Assets\Script\Prototype\CollideAndDamage.cs" />
+    <Compile Include="Assets\Script\Prototype\Util\Singleton.cs" />
     <Compile Include="Assets\Script\Prototype\AnimatorStateBehavior\AttackSMB.cs" />
   </ItemGroup>
   <ItemGroup>
