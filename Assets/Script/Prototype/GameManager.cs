@@ -6,16 +6,12 @@ using UnityEngine.UIElements;
 
 public class GameManager : Singleton<GameManager>
 {
-	UIDocument uIDocument;
-	VisualElement rootVisualElement, loginButton, registerButton, authenticationView, adminView;
-	ScrollView adminPanel, clientList;
-	TextField usernameField, passwordField, consoleTextField;
-	Label messageField, consoleLabel;
 	public NetworkManager networkManager;
+	GameUIManager gameUIManager;
 	public bool worldPositionStays = true;
 	private void Awake() 
 	{
-		HandleUI();
+		gameUIManager = GetComponent<GameUIManager>();
 
 		networkManager.ConnectionApprovalCallback += ApprovalCheck;
 		networkManager.OnClientDisconnectCallback += OnClientDisconnectCallback;
@@ -36,26 +32,31 @@ public class GameManager : Singleton<GameManager>
 			}
 		};
 	}
-
-	void HandleUI()
+	
+	/// <summary>
+	/// Access view variable on start only
+	/// </summary>
+	private void Start() 
 	{
-		uIDocument = GetComponent<UIDocument>();    
-		rootVisualElement = uIDocument.rootVisualElement;
-		authenticationView = rootVisualElement.Q<VisualElement>(name: "authentication-view");
-		adminView = rootVisualElement.Q<VisualElement>(name: "admin-view");
-		adminPanel = rootVisualElement.Q<ScrollView>(name: "admin-view__admin-panel");
-		clientList = adminPanel.Q<ScrollView>(name: "container__client-list");
-		consoleTextField = adminPanel.Q<TextField>(name: "console-container__text-field");
-		consoleLabel = adminPanel.Q<Label>(name: "admin-console-scroll-view__label");
-		loginButton = authenticationView.Q<VisualElement>(name: "authentication-view__login-button");
-		registerButton = authenticationView.Q<VisualElement>(name: "authentication-view__register-button");
-		usernameField = authenticationView.Q<TextField>(name: "authentication-view__username-textfield");
-		passwordField = authenticationView.Q<TextField>(name: "authentication-view__password-textfield");
-		messageField = authenticationView.Q<Label>(name: "authentication-view__message");
-		loginButton.RegisterCallback<MouseDownEvent>((evt) => OnClickLoginButton());
-		registerButton.RegisterCallback<PointerDownEvent>((evt) => OnClickRegisterButton());
-
+		PopulateView();
 		HandleConsole();
+		HandleLogin();
+	}
+	
+	TextField usernameField, passwordField, consoleTextField;
+	Label messageField, consoleLabel;
+	VisualElement authenticationView, adminView;
+	ScrollView clientList;
+	private void PopulateView()
+	{
+		usernameField = gameUIManager.AuthenticateView.UsernameField;
+		passwordField = gameUIManager.AuthenticateView.PasswordField;
+		consoleTextField = gameUIManager.AuthenticateView.ConsoleTextField;
+		authenticationView = gameUIManager.AuthenticateView.AuthenticationView;
+		adminView = gameUIManager.AuthenticateView.AdminView;
+		clientList = gameUIManager.AuthenticateView.ClientList;
+		messageField = gameUIManager.AuthenticateView.MessageField;
+		consoleLabel = gameUIManager.AuthenticateView.ConsoleLabel;
 	}
 
 	// List<string> consoleLines = new List<string>();
@@ -70,7 +71,7 @@ public class GameManager : Singleton<GameManager>
 		consoleTextField.RegisterCallback<KeyDownEvent>
 		(
 			(evt) => 
-			{
+			{				
 				if (evt.keyCode == KeyCode.Return)
 				{
 					consoleLabel.text += "\nadmin$ " + $"{consoleTextField.value}";
@@ -157,9 +158,10 @@ public class GameManager : Singleton<GameManager>
 
 	void OnClientConnectedCallback(ulong obj)
 	{
-		authenticationView.style.display = DisplayStyle.None;
+		gameUIManager.DeactivateLayer((int)GameUIManager.LayerUse.AuthenticateView);
+		gameUIManager.ActivateLayer((int)GameUIManager.LayerUse.MainView);
 	}
-
+	
 	private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
 	{
 		if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
@@ -190,28 +192,31 @@ public class GameManager : Singleton<GameManager>
 	}
 	
 
-	private void OnClickLoginButton()
+	private void HandleLogin()
 	{
-		var username = usernameField.value;
-		var password = passwordField.value;
-		networkManager.NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes($"{username}:{password}");
-		
-		if (username.Equals("server") && password.Equals("server"))
+		gameUIManager.AuthenticateView.onClickLoginButtonDelegate += () => 
 		{
-			// if server exsist, print error message at messageField
+			var username = usernameField.value;
+			var password = passwordField.value;
+			networkManager.NetworkConfig.ConnectionData = System.Text.Encoding.UTF8.GetBytes($"{username}:{password}");
+			
+			if (username.Equals("server") && password.Equals("server"))
+			{
+				// if server exsist, print error message at messageField
 
-			networkManager.StartServer();
-			authenticationView.style.display = DisplayStyle.None;
-			adminView.style.display = DisplayStyle.Flex;
-		} 
-		else if (username.Equals("host") && password.Equals("host"))
-		{
-			// if host exsist, print error message at messageField
+				networkManager.StartServer();
+				authenticationView.style.display = DisplayStyle.None;
+				adminView.style.display = DisplayStyle.Flex;
+			} 
+			else if (username.Equals("host") && password.Equals("host"))
+			{
+				// if host exsist, print error message at messageField
 
-			networkManager.StartHost();
-			authenticationView.style.display = DisplayStyle.None;
-		} 
-		else networkManager.StartClient();
+				networkManager.StartHost();
+				authenticationView.style.display = DisplayStyle.None;
+			} 
+			else networkManager.StartClient();	
+		};
 	}
 
 	private void OnClickRegisterButton()

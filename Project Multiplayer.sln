@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{7014E571-2F45-866E-F666-1F5CE7C11ED1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{2A5351D7-F4A8-50FD-1300-08C96EFDD3A6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins.BackgroundRecompiler.Editor", "Plugins.BackgroundRecompiler.Editor.csproj", "{2548DBA9-35F1-2661-0AD8-BBC6F3199C84}"
 EndProject
 Global
@@ -17,10 +15,6 @@ Global
 		{7014E571-2F45-866E-F666-1F5CE7C11ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7014E571-2F45-866E-F666-1F5CE7C11ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7014E571-2F45-866E-F666-1F5CE7C11ED1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A5351D7-F4A8-50FD-1300-08C96EFDD3A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A5351D7-F4A8-50FD-1300-08C96EFDD3A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A5351D7-F4A8-50FD-1300-08C96EFDD3A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A5351D7-F4A8-50FD-1300-08C96EFDD3A6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2548DBA9-35F1-2661-0AD8-BBC6F3199C84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2548DBA9-35F1-2661-0AD8-BBC6F3199C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2548DBA9-35F1-2661-0AD8-BBC6F3199C84}.Release|Any CPU.ActiveCfg = Release|Any CPU

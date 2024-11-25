@@ -1,0 +1,116 @@
+.main-view__skill-scroll-view .unity-scroll-view__content-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-view__options .unity-scroll-view__content-container {
+}
+
+.main-view__options-collapsed {
+    translate: -200px 0;
+    opacity: 0;
+}
+
+.main-view__option-expand-button-original {
+    width: 50px;
+    height: 50px;
+    background-image: url("project://database/Assets/Misc/Plugins/UIBeginner/ToolTipProject/expand-down.png?fileID=2800000&guid=e4e16c08bc2d6f343af3596d2a788b4a&type=3#expand-down");
+}
+
+.main-view__option-expand-button-collapsed {
+    background-image: url("project://database/Assets/Misc/Plugins/UIBeginner/ToolTipProject/expand.png?fileID=2800000&guid=654486a0882cd104aac8360062faa44e&type=3#expand");
+    width: 50px;
+    height: 50px;
+}
+
+.main-view__option-button {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.main-view__skill-scroll-view {
+    align-self: center;
+    width: 150px;
+    height: 150px;
+}
+
+.safe-area {
+    flex-grow: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    align-self: center;
+}
+
+.has-helper {
+}
+
+.layer {
+    position: absolute;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.-------------------------------------------------------------------------------- {
+}
+
+.authentication-view__text-field {
+    height: 50%;
+    font-size: 70px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.authentication-view__text-field Label {
+    width: 25%;
+    margin-right: 50px;
+}
+
+.authentication-view__label {
+    font-size: 300%;
+}
+
+.authentication-view__button {
+    width: 300px;
+    height: 200px;
+    background-color: rgb(56, 255, 0);
+    border-top-left-radius: 90px;
+    border-top-right-radius: 90px;
+    border-bottom-right-radius: 90px;
+    border-bottom-left-radius: 90px;
+    -unity-text-align: middle-center;
+}
+
+.authentication-view__text-field #unity-text-input {
+    height: 80%;
+    align-self: center;
+}
+
+.-------------------------------------------------------------------------------- {
+}
+
+#console-container__text-field Label {
+    -unity-text-align: middle-center;
+}
+
+#admin-view .unity-text-element {
+    font-size: 40px;
+}
+
+#admin-view Label {
+    margin-right: 60px;
+}
+
+.client-list__entry {
+    width: 100%;
+    height: 50px;
+    -unity-text-align: middle-center;
+    color: rgb(14, 255, 0);
+}
